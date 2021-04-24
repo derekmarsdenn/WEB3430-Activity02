@@ -15,7 +15,7 @@ export function VHelp({message}){
 
 const validationSchema = yup.object({
     title: yup.string().required(),
-    story: yup.string().url().required(),
+    story: yup.string().required(),
     author: yup.string().required()
 })
 export default function BlogpostForm() {

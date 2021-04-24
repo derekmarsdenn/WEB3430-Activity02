@@ -16,9 +16,21 @@ body {
     margin: 0;
 }
 
+.column-left {
+    float: left;
+    width: 80%;
+    padding: 10px;
+  }
+
+  .column-right {
+    float: right;
+    width: 20%;
+    padding: 10px;
+  }
+
 .container {
     max-width: 100%;
-    margin: 10px auto;
+    padding: 10px auto;
     display: flex;
     flex-flow: column nowrap;
     .pull-content-right {
@@ -81,11 +93,20 @@ body {
 }
 
 button.primary {
-    margin: 10px;
+    margin-right: 10px;
     padding: 10px 20px;
     border: 1px solid black;
     border-radius: 5px;
     background: rgb(44, 73, 44);
+    color: white;
+}
+
+button.secondary {
+    margin-right: 10px;
+    padding: 10px 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background: rgb(70, 146, 70);
     color: white;
 }
 

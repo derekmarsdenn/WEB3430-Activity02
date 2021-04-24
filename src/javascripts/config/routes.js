@@ -17,14 +17,14 @@ function isSignedIn(req){
     }
 }
 
-// function requireSignIn(req, res, next){
-//     if(isSignedIn(req)){
-//         next
-//     }else{
-//         res.status(401)
-//         res.end()
-//     }
-// }
+function requireSignIn(req, res, next){
+    if(isSignedIn(req)){
+        next()
+    }else{
+        res.status(401)
+        res.end()
+    }
+}
 
 export function configureRoutes(app){
     app.all('*', (req, res, next) => {
@@ -44,9 +44,9 @@ export function configureRoutes(app){
     // api endpoints
     router.get('/api/blogposts', allBlogpostsAPI)
     router.get('/api/blogposts/:id', oneBlogpostAPI)
-    router.post('/api/blogposts', createBlogpostAPI)
-    router.put('/api/blogposts/:id', updateBlogpostAPI)
-    router.delete('/api/blogposts/:id', deleteBlogpostAPI)
+    router.post('/api/blogposts', requireSignIn, createBlogpostAPI)
+    router.put('/api/blogposts/:id', requireSignIn, updateBlogpostAPI)
+    router.delete('/api/blogposts/:id', requireSignIn, deleteBlogpostAPI)
 
     // Users
     router.post('/api/users/register', registerUserAPI)

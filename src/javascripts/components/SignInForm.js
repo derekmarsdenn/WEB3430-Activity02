@@ -33,8 +33,7 @@ export default function SignInForm() {
             }).then((response) => {
                 if(!response.ok) throw Error('Failed to sign in')
                 return response.text()
-            })
-            .then(() => {
+            }).then(() => {
                 toast('Successfully signed in', {
                     onClose: () => {
                         document.location = "/blogposts"

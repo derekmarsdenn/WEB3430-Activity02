@@ -9,6 +9,7 @@ export const strategy = new LocalStrategy(
                 if(!user){
                     return done(null, false, {message: "User not found"})
                 }else{
+                    console.log(user);
                     if(!user.isValidPassword(password)){
                         return done(null, false, {message: "Incorecct Password"})
                     }else{

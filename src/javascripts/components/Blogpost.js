@@ -31,7 +31,7 @@ export default function Blogpost(props) {
         },
         credentials: 'same-origin',
     }).then(() => {
-        toast('Successfully submitted', {
+        toast('Successfully deleted', {
             onClose: () => {
                 document.location = "/blogposts"
             }
@@ -39,7 +39,7 @@ export default function Blogpost(props) {
 
         setModalOpen(false)
     }).catch((error) => {
-        toast('Failed to submit', {
+        toast('Failed to delete', {
             onClose: () => {
                 document.location = "/blogposts"
             }

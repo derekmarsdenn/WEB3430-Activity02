@@ -38,31 +38,59 @@ export default function BlogpostList() {
 
       return (
         <BlogpostContext.Provider value={{blogposts, setBlogposts, authenticated, setAuthenticated}}>
-          <div className="pull-content-right">
-            <Route path="/blogposts">
-              <button className="primary" onClick={() => history.push('/blogposts/new')}>Create Blogpost</button>
-            </Route>
+          <div className="row">
+            <div className="column-left">
+              <div>
+                <Route path="/blogposts">
+                  <button className="primary" onClick={() => history.push('/blogposts/new')}>Create Blogpost</button>
+                </Route>
+              </div>
+              <h1>Here's the latest...</h1>
+              <main>
+                <Switch>
+                  <Route exact path="/blogposts">
+                    {blogposts.map((b, i, s) => {
+                    return <Blogpost key={b.id} blogpost={b} onLike={ 
+                      () => {
+                        blogposts[i].likes = blogposts[i].likes ? blogposts[i].likes + 1 : 1
+
+                        setBlogposts(blogposts.map(b => b))
+                      }
+                    } />
+                    })}
+                  </Route>
+                  <Route path="/blogposts/new"><BlogpostForm/></Route>
+                  <Route path="/blogposts/:bid/edit"><BlogpostForm/></Route>
+                  <Redirect from="" to="/blogposts"/>
+                  <Route path="*"><ErrorNotFound/></Route>
+                </Switch>
+
+              </main>
             </div>
-          <main>
-            <Switch>
-              <Route exact path="/blogposts">
-                {blogposts.map((b, i, s) => {
-                return <Blogpost key={b.id} blogpost={b} onLike={ 
-                  () => {
-                    blogposts[i].likes = blogposts[i].likes ? blogposts[i].likes + 1 : 1
-
-                    setBlogposts(blogposts.map(b => b))
-                  }
-                } />
-                })}
-              </Route>
-              <Route path="/blogposts/new"><BlogpostForm/></Route>
-              <Route path="/blogposts/:bid/edit"><BlogpostForm/></Route>
-              <Redirect from="" to="/blogposts"/>
-              <Route path="*"><ErrorNotFound/></Route>
-            </Switch>
-
-          </main>
+            <div className="column-right">
+              <h2>People you may know...</h2>
+                <div>
+                  <h4>@john_hancock1776</h4>
+                  <button className="primary">Follow</button>
+                  <hr/>
+                </div>
+                <div>
+                  <h4>@edgarpoe</h4>
+                  <button className="primary">Follow</button>
+                  <hr/>
+                </div>
+                <div>
+                  <h4>@g.orwell84</h4>
+                  <button className="primary">Follow</button>
+                  <hr/>
+                </div>
+                <div>
+                  <h4>@nick_pepperwood4D</h4>
+                  <button className="primary">Follow</button>
+                  <hr/>
+                </div>
+            </div>
+          </div>
         </BlogpostContext.Provider>
       )
     }

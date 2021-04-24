@@ -38,7 +38,7 @@ userSchema.methods.setPassword = function(password){
     this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 128, 'sha512').toString('hex')
 }
 
-userSchema.method.isValidPassword = function(password){
+userSchema.methods.isValidPassword = function(password){
     let hash = crypto.pbkdf2Sync(password, this.salt, 1000, 128, 'sha512').toString('hex')
     return this.hash === hash
 }
@@ -56,4 +56,5 @@ userSchema.methods.generateJWT = function(){
     }, APP_SECRET)
 }
 
+console.log(userSchema);
 export let User = mongoose.model("User", userSchema)
